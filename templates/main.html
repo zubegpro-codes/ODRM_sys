@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="{% static 'med_img/icons/logo.png' %}" type="image/x-icon" />
+    <link rel="stylesheet" href="{% static 'styles/style.css' %}" />
+    <link rel="stylesheet" href="{% static 'styles/bootstrap.min.css' %}" />
+    <title>Online Disaster Report Management System </title>
+    <script type="text/javascript">
+      var user = '{{request.user}}';
+
+      function getToken(name){
+        var cookieValue = null;
+        if (document.cookie && document.cookie !=''){
+          var cookies = document.cookie.split(';');
+          for (var i=0; i<cookies.length; i++){
+            var cookie= cookies[i].trim();
+            if (cookie.substring(0, name.length + 1)===(name +'=')){
+              cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+              break;
+            }
+          }
+        }
+        return cookieValue;
+      }
+      var csrftoken = getToken('csrftoken');
+    </script>
+  </head>
+  <body class="container-fluid">
+    {% include 'navbar.html' %}
+    
+    {% block content %}
+
+    {% endblock %}
+
+    {% include 'footer.html' %}
+
+  
+    <script type="text/javascript">
+      console.log("Script executed!");
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+    
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable({{chart_data_json|safe}});
+        console.log({{chart_data_json}})
+    
+        var options =
+        {'title':{{d_repo_json}},  'width':550,'height':400,is3D: true};
+    
+        var chart =
+        new google.visualization.PieChart(document.getElementById('piechart'));
+        chart.draw(data, options);
+      }     
+    
+    
+    </script>
+
+    <script type="text/javascript"
+    src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{% static 'js/script.js' %}"></script>
+    <!-- <script src="{% static 'js/chartJs.js' %}"></script> -->
+  </body>
+
+</html>
