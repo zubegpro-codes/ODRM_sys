@@ -233,7 +233,7 @@ a {
 }
 
 .dropdown--menu a:hover {
-  background-color: var(--color-dark-medium);
+  background-color: #5579c6 ;
 }
 
 .dropdown--menu > a:not(:last-child) {

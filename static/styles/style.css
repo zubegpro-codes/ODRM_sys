@@ -3,7 +3,7 @@
 :root {
   /* --color-main: #ef231c; */
   --color-main-light: rgb(255, 255, 255);
-  --color-dark:#005bb3;
+  --color-dark:#5579c6 ;
 /*--color-dark:#fff5e6 ;*/
   --color-dark-medium: #f3f3fb;
   --color-dark-light: #040c4a;
@@ -233,7 +233,7 @@ a {
 }
 
 .dropdown--menu a:hover {
-  background-color: var(--color-dark-medium);
+  background-color: #5579c6 ;
 }
 
 .dropdown--menu > a:not(:last-child) {

@@ -39,7 +39,14 @@
                   <a href="{% url 'home' %}?h={{topic.name}}">{{topic.name}} <span>{{topic.reports_set.all.count}}</span></a>
                 </li>
                 {% endfor %}
+
             </ul>
+
+            {%if request.user.is_staff or request.user.is_superuser %}
+            <a class="btn btn--link" href="{% url 'create-topics'%}">
+              Add Topics
+            </a>
+              {% endif %}
           </div>
         </div>
       </div>

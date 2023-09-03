@@ -195,8 +195,25 @@ def report(request, pk):
     return render(request, 'base/report.html',context)
 
 
+def createTopic(request):
+    form= Categoryform()
+    if request.method == 'POST':
+        formReturn = Categoryform(request.POST)
+        if formReturn.is_valid():
+            toptopic = formReturn.save(commit=False)
+            
+            changeTopicCase = toptopic.name.title()
+            toptopic.name = changeTopicCase
+    
+            topic, created = Category.objects.get_or_create(name=changeTopicCase)
+            topic.save()
+            return redirect('home')
+    return render(request, 'base/create_topic.html', context = {'form': form})
+
+       
 def update_report_status(request):
     data= json.loads(request.body)
+    print('hello this is the previous function', data)
     reportId= data['reportId']
     action= data['action']  
     instance = get_object_or_404(Report, id = reportId) 
@@ -213,32 +230,33 @@ def update_report_status(request):
     return JsonResponse({'message':'itemwasadded' })
 
 
-def createTopic(request):
-    form= Categoryform()
-    if request.method == 'POST':
-        formReturn = Categoryform(request.POST)
-        if formReturn.is_valid():
-            toptopic = formReturn.save(commit=False)
-            
-            changeTopicCase = toptopic.name.title()
-            toptopic.name = changeTopicCase
-    
-            topic, created = Category.objects.get_or_create(name=changeTopicCase)
-            topic.save()
-            return redirect('home')
-    return render(request, 'base/create_topic.html', context = {'form': form})
-
-            
 def creatgroup(request):
-    if request.method == 'POST':
-        print(request)
-    makestaff =0
-    # instance = get_object_or_404(CustomUser, is_staff = makestaff) 
+    customUsers = CustomUser.objects.all()
+    context ={
+        "customUsers": customUsers
+    }
+    for use in  customUsers:
+        print(use.is_staff)
+
+    return render(request, 'base/create_group.html',context)
     
 
+def updateUserStatus(request):
+    data= json.loads(request.body)
+    customuser= data['customuser']
+    action= data['uaction']  
+    instance = get_object_or_404(CustomUser, id = customuser) 
+    if action == 'superuser':
+        instance.is_superuser = True
+        instance.save()
+    elif action == 'staff':
+        instance.is_staff = True
+        instance.save()
+    else:
+        instance.is_staff = False
+        instance.is_superuser = False
+        instance.save()
 
-
-    return render(request, 'base/create_group.html')
+    return JsonResponse({'message':'itemwasadded' })
     
-
 

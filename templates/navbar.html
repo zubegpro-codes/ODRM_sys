@@ -28,8 +28,8 @@
           </div>
           <p>{{request.user.username}} <span>@{{request.user.email}}</span></p>
         </a>
-        <button class="dropdown-button text-white">
-          <svg  version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+        <button class="dropdown-button">
+          <svg  version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" style="background-color:#5579c6 ; color: rgb(243, 243, 247);" viewBox="0 0 32 32">
             <title>chevron-down</title>
             <path d="M16 21l-13-13h-3l16 16 16-16h-3l-13 13z"></path>
           </svg>
@@ -57,7 +57,7 @@
         {%if request.user.is_staff or request.user.is_superuser %}
         <a href="{% url 'group_user' %}" class="dropdown-link"
           ><svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
-            <title>sign-out</title>
+            <title>add-admin</title>
             <path
               d="M3 0h22c0.553 0 1 0 1 0.553l-0 3.447h-2v-2h-20v28h20v-2h2l0 3.447c0 0.553-0.447 0.553-1 0.553h-22c-0.553 0-1-0.447-1-1v-30c0-0.553 0.447-1 1-1z"
             ></path>

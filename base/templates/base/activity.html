@@ -23,7 +23,7 @@
                 <div class="activities__boxHeader roomListRoom__header">
                   <a href="{% url 'user-profile' r_comment.user.id %}" class="roomListRoom__author">
                     <div class="avatar avatar--small">
-                      <img src="{{report.user.avatar.url}}" />
+                      <img src="{{r_comment.user.avatar.url}}" />
                     </div>
                     <p>
                       {{r_comment.user}}

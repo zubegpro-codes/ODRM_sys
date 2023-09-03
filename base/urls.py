@@ -10,7 +10,9 @@ urlpatterns = [
 
     path('register/', views.registerPage, name="register"),
     path('update_user', views.update_user, name='update_user'),
-    path('group_user', views.creatgroup, name='group_user'),
+    path('group_user/', views.creatgroup, name='group_user'),
+    path('update_user_status/', views.updateUserStatus, name='update_user_status'),
+
 
     path('profile/<str:pk>/', views.userProfile, name='user-profile'),
 
@@ -24,5 +26,6 @@ urlpatterns = [
     path('create-report/', views.createReport, name = "create-report"),
     path('delete-report/<str:pk>/', views.deleteReport, name='delete-report'),
     path('update_report/', views.update_report_status, name='update_report'),
+
 
 ] 
